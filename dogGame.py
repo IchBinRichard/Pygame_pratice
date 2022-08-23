@@ -430,17 +430,9 @@ class Water(pg.sprite.Sprite):
         self.rect.y += self.speedy
         if self.rect.top > HEIGHT:
             self.kill()
-
 #---補生命值---        
     
-    
-    
-
 pg.mixer.music.play(-1) #(參數)音樂要重複播放幾次？
-
-#---sprite群組，可以放sprite的物件---
-
-
 
 #---遊戲迴圈---
 show_init = True #遊戲初始畫面
@@ -477,15 +469,15 @@ while running:
     for hit in foodsHitPlayer:
         eat_sound.play()
         score += int(hit.radius - 20)
-        newFood() #每碰撞到一次Rock，就再新增加一個Rock，否則Rock會被打完
+        newFood() #每吃一個就再新增加一個，否則Foodk會被吃完
     
     #處理Player吃到Not_Food，若吃到要刪除則為True    
     notFoodsHitPlayer = pg.sprite.spritecollide(player, not_foods, True, pg.sprite.collide_circle) 
     for hit in notFoodsHitPlayer:
         player.health -= 35
         wrong_eat_sound.play()
-        newNot_food()
-        newWater()
+        newNot_food() #每吃一個就再新增加一個，否則Foodk會被吃完
+        newWater() #每吃一個Not_Food給一個Wate可以補充生命值
         if player.health <= 0:
             player_die = Explosion(player.rect.center)
             all_sprites.add(player_die)
